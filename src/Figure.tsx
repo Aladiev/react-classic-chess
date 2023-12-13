@@ -9,7 +9,11 @@ function Figure({ position, type, color, onClick, clickedColumn }: { position: s
     return (
         <div 
             className={
-                `figure ${type}-${color} position${position} ${ isClicked ? 'clicked' : '' }`
+                `figure 
+                ${color} 
+                ${type}-${color} 
+                ${ position ? `position${position}` : 'beaten'} 
+                ${ isClicked ? 'clicked' : '' }`
             } 
             key={
                 type + '-' + color + position} onClick={onClick.bind(null, position)

@@ -378,6 +378,10 @@
     top: 350px;
 }
 
-.clicked {
+.clicked:not(.beaten) {
     background-color: yellow;
+}
+
+.beaten {
+    display: none;
 }
