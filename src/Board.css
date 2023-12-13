@@ -1,0 +1,149 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+.board {
+  border: 1px solid black;
+
+  position: relative;
+
+  left: 50%;
+  top: 100px;
+
+  transform: translateX(-50%);
+
+  width: 400px;
+}
+
+.row {
+  position: relative;
+
+  height: 50px;
+}
+
+.cell {
+  position: relative;
+
+  display: inline-block;
+  
+  width: 50px;
+  height: 50px;
+
+  margin: 0;
+}
+
+.row::after {
+  display: block;
+
+  position: absolute;
+
+  right: -20px;
+  top: 50%;
+
+  transform: translateY(-50%);
+}
+
+.row:nth-child(1)::after { content: '8' }
+.row:nth-child(2)::after { content: '7' }
+.row:nth-child(3)::after { content: '6' }
+.row:nth-child(4)::after { content: '5' }
+.row:nth-child(5)::after { content: '4' }
+.row:nth-child(6)::after { content: '3' }
+.row:nth-child(7)::after { content: '2' }
+.row:nth-child(8)::after { content: '1' }
+
+.row:nth-child(8) .cell::before {
+  display: block;
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -40px;
+
+  transform: translateX(-50%);
+}
+
+.row:nth-child(8) .cell:nth-child(1):before { content: 'A' }
+.row:nth-child(8) .cell:nth-child(2):before { content: 'B' }
+.row:nth-child(8) .cell:nth-child(3):before { content: 'C' }
+.row:nth-child(8) .cell:nth-child(4):before { content: 'D' }
+.row:nth-child(8) .cell:nth-child(5):before { content: 'E' }
+.row:nth-child(8) .cell:nth-child(6):before { content: 'F' }
+.row:nth-child(8) .cell:nth-child(7):before { content: 'G' }
+.row:nth-child(8) .cell:nth-child(8):before { content: 'H' }
+
+.cell-black {
+  background-color: #bb7843;
+}
+
+.cell-white {
+  background-color: #e1c294;
+}
+
+.posible::after {
+  content: '';
+
+  display: block;
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);  
+}
+
+.figure-inside.posible::after {
+  width: 45px;
+  height: 45px;
+
+  border: 3px solid green;
+}
+
+.posible:not(.figure-inside)::after {
+  width: 10px;
+  height: 10px;
+
+  background-color: green;
+
+  border-radius: 50%;
+}
