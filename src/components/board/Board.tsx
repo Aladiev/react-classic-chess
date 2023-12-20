@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import css from './Board.module.scss';
 import { kingUnderAttack } from '../kingUnderAttack';
 import { cloneBoard } from '../cloneBoard';
@@ -18,6 +18,9 @@ function Board() {
   const [clickedPosition, setClickedPosition] = useState('');
   const [turnOrder, setTurnOrder] = useState('white');
   const [posibleMoves, setPosibleMoves]: [posibleMoves: string[], setPosibleMoves: Function] = useState([]);
+
+  const [isFigureInside, setIsFigureInside] = useState<Boolean>(false)
+  const [figureInsideCoordination, setFigureInsideCoordination] = useState<String>('')
 
   // проверяем на шах или на мат
   function checkForCheckmate(board: boardTypeWithoutMoving) {
@@ -110,6 +113,15 @@ function Board() {
     }
   }
 
+  useEffect(() => {
+    posibleMoves.forEach((e) => {
+      if(board[e]){
+        setIsFigureInside(true)
+        setFigureInsideCoordination(e)
+      }
+    })
+  },[board])
+
   return (
     <>
 
@@ -125,7 +137,7 @@ function Board() {
                   css.cell,
                   css[`cell-${(row + letters.indexOf(col)) % 2 ? 'black' : 'white'}`],
                   css[posibleMoves.indexOf(position) > -1 ? 'posible' : ''],
-                  css[board[position] ? 'figure-inside' : '']
+                  css[isFigureInside && figureInsideCoordination === position ? 'figure-inside' : '']
                 )
               }
               onClick={cellOnClick.bind(null, position)} />
