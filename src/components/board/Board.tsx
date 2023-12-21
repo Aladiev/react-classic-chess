@@ -10,7 +10,8 @@ import generateFigures from './generateFigures';
 const turnOrderRule: { [key: string]: string } = { 'white': 'black', 'black': 'white' };
 
 function Board() {
-  const board: boardType = {};
+  // const board: boardType = {};
+  const [board, setBoard] = useState<boardType>({})
 
   const [check, setCheck] = useState(false);
   const [checkmate, setCheckmate] = useState(false);
@@ -18,10 +19,6 @@ function Board() {
   const [turnOrder, setTurnOrder] = useState('white');
   const [posibleMoves, setPosibleMoves]: [posibleMoves: string[], setPosibleMoves: Function] = useState([]);
 
-  const [isFigureInside, setIsFigureInside] = useState<Boolean>(false)
-  const [figureInsideCoordination, setFigureInsideCoordination] = useState<string[]>([])
-  const [stateBoard, setStateBoard] = useState<object>({})
-  
   // проверяем на шах или на мат
   function checkForCheckmate(board: boardTypeWithoutMoving) {
     const result = { check: false, checkmate: false };
@@ -68,15 +65,16 @@ function Board() {
   // генерим пешки
   const figures = generateFigures(board, clickedPosition, cellOnClick);
 
-  const checkingResult = checkForCheckmate(board);
+  useEffect(() => {
+    const checkingResult = checkForCheckmate(board);
 
-  if (checkingResult.check != check) setCheck(!check);
-  if (checkingResult.checkmate != checkmate) setCheckmate(!checkmate);
+    if (checkingResult.check != check) setCheck(!check);
+    if (checkingResult.checkmate != checkmate) setCheckmate(!checkmate);
+  });
 
   // клик по клетке или фигуре
   function cellOnClick(position: string) {
     // выбор чем ходить
-    setStateBoard(board)
     if (board[position] && board[position].color === turnOrder) {
       setClickedPosition(position);
 
@@ -88,6 +86,7 @@ function Board() {
     if (clickedPosition && posibleMoves.includes(position) && !board[position]) {
       board[clickedPosition].moveTo(position);
       delete board[clickedPosition];
+      setBoard(board);
 
       setTurnOrder(turnOrderRule[turnOrder]);
       setClickedPosition('');
@@ -104,6 +103,8 @@ function Board() {
       board[clickedPosition].moveTo(position);
       delete board[clickedPosition];
 
+      setBoard(board);
+
       setTurnOrder(turnOrderRule[turnOrder]);
       setClickedPosition('');
       setPosibleMoves([]);
@@ -112,28 +113,16 @@ function Board() {
     }
   }
 
-  useEffect(() => {
-    let res  : string[]= [];
-    posibleMoves.forEach((e: string) => {
-      if(board[e]){
-        res.push(e)
-        setIsFigureInside(true)
-        setFigureInsideCoordination(prev => prev.concat(res))
-      }
-    })
-  },[stateBoard])
-
   return (
     <>
-
       <div className={css.board}>
         {indexes.map(row => <div className={css.row} key={'row' + row}>
           {letters.map(col => {
             const position : string = col + row;
 
-            const filteredFigures = figureInsideCoordination.filter((e) => 
-              e == position
-            )
+            // const filteredFigures = figureInsideCoordination.filter((e) => 
+            //   e == position
+            // )
             return <div
               key={'cell' + position}
               className={
@@ -141,7 +130,7 @@ function Board() {
                   css.cell,
                   css[`cell-${(row + letters.indexOf(col)) % 2 ? 'black' : 'white'}`],
                   css[posibleMoves.indexOf(position) > -1 ? 'posible' : ''],
-                  css[isFigureInside && filteredFigures.includes(position) ? 'figure-inside' : '']
+                  css[board[position] ? 'figure-inside' : '']
                 )
               }
               onClick={cellOnClick.bind(null, position)} />
