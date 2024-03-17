@@ -8,14 +8,14 @@
 
     transform: translateX(-50%);
 
-    width: 400px;
+    width: 800px;
 }
 
 
 .row {
     position: relative;
 
-    height: 50px;
+    height: 100px;
 }
 
 .cell {
@@ -23,8 +23,8 @@
 
     display: inline-block;
 
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
 
     margin: 0;
 }
@@ -34,10 +34,12 @@
 
     position: absolute;
 
-    right: -20px;
+    left: -40px;
     top: 50%;
 
     transform: translateY(-50%);
+
+    font-weight: 700;
 }
 
 .row:nth-child(1)::after {
@@ -81,6 +83,8 @@
     bottom: -40px;
 
     transform: translateX(-50%);
+
+    font-weight: 700;
 }
 
 .row:nth-child(8) .cell:nth-child(1):before {
@@ -137,15 +141,15 @@
 }
 
 .figure-inside.posible::after {
-    width: 45px;
-    height: 45px;
+    width: 95px;
+    height: 95px;
 
     border: 3px solid green;
 }
 
 .posible:not(.figure-inside)::after {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
 
     background-color: green;
 
