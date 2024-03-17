@@ -6,6 +6,7 @@ import cn from 'classnames';
 import { letters, indexes } from "./../config.json";
 import { boardType, boardTypeWithoutMoving } from '../types';
 import generateFigures from './generateFigures';
+import GameOverModal from '../gameOverModal';
 
 const turnOrderRule: { [key: string]: string } = { 'white': 'black', 'black': 'white' };
 
@@ -120,9 +121,6 @@ function Board() {
           {letters.map(col => {
             const position : string = col + row;
 
-            // const filteredFigures = figureInsideCoordination.filter((e) => 
-            //   e == position
-            // )
             return <div
               key={'cell' + position}
               className={
@@ -140,7 +138,7 @@ function Board() {
         {figures}
       </div>
       {check ? <div>CHECK</div> : ''}
-      {checkmate ? <div>CHECKMATE</div> : ''}
+      {checkmate ? <GameOverModal/> : ''}
     </>
   )
 }
