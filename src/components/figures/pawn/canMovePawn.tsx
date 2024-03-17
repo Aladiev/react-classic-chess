@@ -1,7 +1,7 @@
-import { cloneBoard } from "../../cloneBoard";
-import { kingUnderAttack } from "../../kingUnderAttack";
-import { boardType } from "../../types";
-import { letters } from "../../config.json";
+import { cloneBoard } from "../../board/cloneBoard";
+import { kingUnderAttack } from "../../board/kingUnderAttack";
+import { boardType } from "../../board/types";
+import { letters } from "../../board/config.json";
 
 export default function canMovePawn(color: string, from: string, board: boardType, recurse = true) {
     const [fromCol, b] = from.split('');

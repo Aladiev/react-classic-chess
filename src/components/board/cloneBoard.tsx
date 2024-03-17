@@ -1,9 +1,9 @@
-import canMoveBishop from "./figures/bishop/canMoveBishop";
-import canMoveKing from "./figures/king/canMoveKing";
-import canMoveKnight from "./figures/knight/canMoveKnight";
-import canMovePawn from "./figures/pawn/canMovePawn";
-import canMoveQueen from "./figures/queen/canMoveQueen";
-import canMoveRook from "./figures/rook/canMoveRook";
+import canMoveBishop from "../figures/bishop/canMoveBishop";
+import canMoveKing from "../figures/king/canMoveKing";
+import canMoveKnight from "../figures/knight/canMoveKnight";
+import canMovePawn from "../figures/pawn/canMovePawn";
+import canMoveQueen from "../figures/queen/canMoveQueen";
+import canMoveRook from "../figures/rook/canMoveRook";
 
 export const canMoveDict: { [key: string]: Function } = {
     'pawn': canMovePawn,

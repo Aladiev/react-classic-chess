@@ -1,4 +1,4 @@
-import { boardType } from "../../types";
+import { boardType } from "../../board/types";
 import canMoveBishop from "../bishop/canMoveBishop";
 import canMoveRook from "../rook/canMoveRook";
 

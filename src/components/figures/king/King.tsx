@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import css from '../Figures.module.scss'
 import cn from 'classnames';
-import { boardType } from '../../types';
+import { boardType } from '../../board/types';
 import canMoveKing from './canMoveKing';
 
 

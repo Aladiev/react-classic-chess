@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import css from './Board.module.scss';
-import { kingUnderAttack } from '../kingUnderAttack';
-import { cloneBoard } from '../cloneBoard';
+import { kingUnderAttack } from './kingUnderAttack';
+import { cloneBoard } from './cloneBoard';
 import cn from 'classnames';
-import { letters, indexes } from "./../config.json";
-import { boardType, boardTypeWithoutMoving } from '../types';
+import { letters, indexes } from "./config.json";
+import { boardType, boardTypeWithoutMoving } from './types';
 import generateFigures from './generateFigures';
 import GameOverModal from '../gameOverModal';
 

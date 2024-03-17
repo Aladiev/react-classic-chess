@@ -1,7 +1,7 @@
-import { boardType } from "../../types";
-import { letters, indexes } from "../../config.json";
-import { cloneBoard } from "../../cloneBoard";
-import { kingUnderAttack } from "../../kingUnderAttack";
+import { boardType } from "../../board/types";
+import { letters, indexes } from "../../board/config.json";
+import { cloneBoard } from "../../board/cloneBoard";
+import { kingUnderAttack } from "../../board/kingUnderAttack";
 
 export default function canMoveBishop(color: string, from: string, board: boardType, recurse = true) {
     const [col, _] = from.split('');

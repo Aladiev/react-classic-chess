@@ -4,8 +4,8 @@ import Knight from "../figures/knight/Knight";
 import Pawn from "../figures/pawn/Pawn";
 import Queen from "../figures/queen/Queen";
 import Rook from "../figures/rook/Rook";
-import { boardType } from "../types";
-import { letters } from "./../config.json";
+import { boardType } from "./types";
+import { letters } from "./config.json";
 
 
 export default function generateFigures(board: boardType, clickedPosition: string, cellOnClick: Function) {

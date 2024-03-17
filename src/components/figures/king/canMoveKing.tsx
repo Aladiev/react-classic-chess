@@ -1,6 +1,6 @@
-import { cloneBoard } from "../../cloneBoard";
-import { boardType } from "../../types";
-import { letters, indexes } from "../../config.json";
+import { cloneBoard } from "../../board/cloneBoard";
+import { boardType } from "../../board/types";
+import { letters, indexes } from "../../board/config.json";
 
 export default function canMoveKing(color: string, from: string, board: boardType, recurse = true) {
     const [col, _] = from.split('');

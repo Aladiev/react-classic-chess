@@ -2,7 +2,7 @@ import { useState } from 'react';
 import css from '../Figures.module.scss'
 import cn from 'classnames';
 import canMoveRook from './canMoveRook';
-import { boardType } from '../../types';
+import { boardType } from '../../board/types';
 
 function Rook({ letter, color, onClick, clickedPosition, uid, board }: { board: boardType, letter: string, color: string, onClick: Function, clickedPosition: string, uid: string }) {
     const [positionRook, setPositionRook] = useState(letter + (color === 'white' ? 1 : 8));
