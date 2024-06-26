@@ -1,0 +1,378 @@
+.figure {
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  background-size: 100px;
+
+  z-index: 1;
+
+  &_bishop {
+    background-image: url("../../shared/constants/images/Chess_tile_bl.svg");
+    &_black {
+      background-image: url("../../shared/constants/images/Chess_tile_bd.svg");
+    }
+  }
+  &_knight {
+    background-image: url("../../shared/constants/images/Chess_tile_nl.svg");
+    &_black {
+      background-image: url("../../shared/constants/images/Chess_tile_nd.svg");
+    }
+  }
+
+  &_pawn {
+    background-image: url("../../shared/constants/images/Chess_tile_pl.svg");
+    &_black {
+      background-image: url("../../shared/constants/images/Chess_tile_pd.svg");
+    }
+  }
+  &_queen {
+    background-image: url("../../shared/constants/images/Chess_tile_ql-whitebg.svg");
+    &_black {
+      background-image: url("../../shared/constants/images/Chess_tile_qd.svg");
+    }
+  }
+  &_rook {
+    background-image: url("../../shared/constants/images/whitebg.svg");
+    &_black {
+      background-image: url("../../shared/constants/images/Chess_tile_rd.svg");
+    }
+  }
+  &_king {
+    background-image: url("../../shared/constants/images/Chess_tile_kl-whitebg.svg");
+    &_black {
+      background-image: url("../../shared/constants/images/Chess_tile_kd.svg");
+    }
+  }
+}
+
+/* Positions */
+
+.positionA8 {
+  left: 0px;
+  top: 0px;
+}
+
+.positionA7 {
+  left: 0px;
+  top: 100px;
+}
+
+.positionA6 {
+  left: 0px;
+  top: 200px;
+}
+
+.positionA5 {
+  left: 0px;
+  top: 300px;
+}
+
+.positionA4 {
+  left: 0px;
+  top: 400px;
+}
+
+.positionA3 {
+  left: 0px;
+  top: 500px;
+}
+
+.positionA2 {
+  left: 0px;
+  top: 600px;
+}
+
+.positionA1 {
+  left: 0px;
+  top: 700px;
+}
+
+.positionB8 {
+  left: 100px;
+  top: 0px;
+}
+
+.positionB7 {
+  left: 100px;
+  top: 100px;
+}
+
+.positionB6 {
+  left: 100px;
+  top: 200px;
+}
+
+.positionB5 {
+  left: 100px;
+  top: 300px;
+}
+
+.positionB4 {
+  left: 100px;
+  top: 400px;
+}
+
+.positionB3 {
+  left: 100px;
+  top: 500px;
+}
+
+.positionB2 {
+  left: 100px;
+  top: 600px;
+}
+
+.positionB1 {
+  left: 100px;
+  top: 700px;
+}
+
+.positionC8 {
+  left: 200px;
+  top: 0px;
+}
+
+.positionC7 {
+  left: 200px;
+  top: 100px;
+}
+
+.positionC6 {
+  left: 200px;
+  top: 200px;
+}
+
+.positionC5 {
+  left: 200px;
+  top: 300px;
+}
+
+.positionC4 {
+  left: 200px;
+  top: 400px;
+}
+
+.positionC3 {
+  left: 200px;
+  top: 500px;
+}
+
+.positionC2 {
+  left: 200px;
+  top: 600px;
+}
+
+.positionC1 {
+  left: 200px;
+  top: 700px;
+}
+
+.positionD8 {
+  left: 300px;
+  top: 0px;
+}
+
+.positionD7 {
+  left: 300px;
+  top: 100px;
+}
+
+.positionD6 {
+  left: 300px;
+  top: 200px;
+}
+
+.positionD5 {
+  left: 300px;
+  top: 300px;
+}
+
+.positionD4 {
+  left: 300px;
+  top: 400px;
+}
+
+.positionD3 {
+  left: 300px;
+  top: 500px;
+}
+
+.positionD2 {
+  left: 300px;
+  top: 600px;
+}
+
+.positionD1 {
+  left: 300px;
+  top: 700px;
+}
+
+.positionE8 {
+  left: 400px;
+  top: 0px;
+}
+
+.positionE7 {
+  left: 400px;
+  top: 100px;
+}
+
+.positionE6 {
+  left: 400px;
+  top: 200px;
+}
+
+.positionE5 {
+  left: 400px;
+  top: 300px;
+}
+
+.positionE4 {
+  left: 400px;
+  top: 400px;
+}
+
+.positionE3 {
+  left: 400px;
+  top: 500px;
+}
+
+.positionE2 {
+  left: 400px;
+  top: 600px;
+}
+
+.positionE1 {
+  left: 400px;
+  top: 700px;
+}
+
+.positionF8 {
+  left: 500px;
+  top: 0px;
+}
+
+.positionF7 {
+  left: 500px;
+  top: 100px;
+}
+
+.positionF6 {
+  left: 500px;
+  top: 200px;
+}
+
+.positionF5 {
+  left: 500px;
+  top: 300px;
+}
+
+.positionF4 {
+  left: 500px;
+  top: 400px;
+}
+
+.positionF3 {
+  left: 500px;
+  top: 500px;
+}
+
+.positionF2 {
+  left: 500px;
+  top: 600px;
+}
+
+.positionF1 {
+  left: 500px;
+  top: 700px;
+}
+
+.positionG8 {
+  left: 600px;
+  top: 0px;
+}
+
+.positionG7 {
+  left: 600px;
+  top: 100px;
+}
+
+.positionG6 {
+  left: 600px;
+  top: 200px;
+}
+
+.positionG5 {
+  left: 600px;
+  top: 300px;
+}
+
+.positionG4 {
+  left: 600px;
+  top: 400px;
+}
+
+.positionG3 {
+  left: 600px;
+  top: 500px;
+}
+
+.positionG2 {
+  left: 600px;
+  top: 600px;
+}
+
+.positionG1 {
+  left: 600px;
+  top: 700px;
+}
+
+.positionH8 {
+  left: 700px;
+  top: 0px;
+}
+
+.positionH7 {
+  left: 700px;
+  top: 100px;
+}
+
+.positionH6 {
+  left: 700px;
+  top: 200px;
+}
+
+.positionH5 {
+  left: 700px;
+  top: 300px;
+}
+
+.positionH4 {
+  left: 700px;
+  top: 400px;
+}
+
+.positionH3 {
+  left: 700px;
+  top: 500px;
+}
+
+.positionH2 {
+  left: 700px;
+  top: 600px;
+}
+
+.positionH1 {
+  left: 700px;
+  top: 700px;
+}
+
+.clicked:not(.beaten) {
+  background-color: yellow;
+}
+
+.beaten {
+  display: none;
+}

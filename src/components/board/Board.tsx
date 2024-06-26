@@ -1,24 +1,37 @@
-import { useEffect, useState } from 'react'
-import css from './Board.module.scss';
-import { kingUnderAttack } from './kingUnderAttack';
-import { cloneBoard } from './cloneBoard';
-import cn from 'classnames';
+import { useEffect, useState } from "react";
+import css from "./Board.module.scss";
+import { kingUnderAttack } from "./kingUnderAttack";
+import { cloneBoard } from "./cloneBoard";
+import cn from "classnames";
 import { letters, indexes } from "./config.json";
-import { boardType, boardTypeWithoutMoving } from './types';
-import generateFigures from './generateFigures';
-import GameOverModal from '../gameOverModal';
+import { boardType, boardTypeWithoutMoving } from "./types";
+import generateFigures from "./generateFigures";
+import GameOverModal from "../gameOverModal";
+import { useDispatch, useSelector } from "react-redux";
+import { boardSelector } from "../../redux/selectors/selectors";
+import FiguresList from "../../widgets/FiguresList/FiguresList";
 
-const turnOrderRule: { [key: string]: string } = { 'white': 'black', 'black': 'white' };
+const turnOrderRule: { [key: string]: string } = {
+  white: "black",
+  black: "white",
+};
 
 function Board() {
   // const board: boardType = {};
-  const [board, setBoard] = useState<boardType>({})
+  const dispatch = useDispatch();
+
+  const [board, setBoard] = useState<boardType>({});
+
+  const newBoard = useSelector(boardSelector);
 
   const [check, setCheck] = useState(false);
   const [checkmate, setCheckmate] = useState(false);
-  const [clickedPosition, setClickedPosition] = useState('');
-  const [turnOrder, setTurnOrder] = useState('white');
-  const [posibleMoves, setPosibleMoves]: [posibleMoves: string[], setPosibleMoves: Function] = useState([]);
+  const [clickedPosition, setClickedPosition] = useState("");
+  const [turnOrder, setTurnOrder] = useState("white");
+  const [posibleMoves, setPosibleMoves]: [
+    posibleMoves: string[],
+    setPosibleMoves: Function
+  ] = useState([]);
 
   // проверяем на шах или на мат
   function checkForCheckmate(board: boardTypeWithoutMoving) {
@@ -30,7 +43,11 @@ function Board() {
       const posibles = board[position].canMove();
 
       for (const posiblePosition of posibles) {
-        if (board[posiblePosition] && board[posiblePosition].type === 'king' && board[posiblePosition].color !== board[position].color) {
+        if (
+          board[posiblePosition] &&
+          board[posiblePosition].type === "king" &&
+          board[posiblePosition].color !== board[position].color
+        ) {
           result.check = true;
 
           const kingMoves = board[posiblePosition].canMove();
@@ -39,7 +56,12 @@ function Board() {
             let flag = true;
 
             for (const friendPosition in board) {
-              if (!board[friendPosition] || board[friendPosition].color !== board[posiblePosition].color || board[friendPosition].type === 'king') continue;
+              if (
+                !board[friendPosition] ||
+                board[friendPosition].color !== board[posiblePosition].color ||
+                board[friendPosition].type === "king"
+              )
+                continue;
 
               const friendMoves = board[friendPosition].canMove();
 
@@ -49,7 +71,10 @@ function Board() {
                 boardCopy[friendMove] = boardCopy[friendPosition];
                 delete boardCopy[friendPosition];
 
-                const checkAfterFriendMove = kingUnderAttack(boardCopy, board[posiblePosition].color);
+                const checkAfterFriendMove = kingUnderAttack(
+                  boardCopy,
+                  board[posiblePosition].color
+                );
 
                 if (!checkAfterFriendMove) flag = false;
               }
@@ -73,6 +98,10 @@ function Board() {
     if (checkingResult.checkmate != checkmate) setCheckmate(!checkmate);
   });
 
+  useEffect(() => {
+    dispatch();
+  }, []);
+
   // клик по клетке или фигуре
   function cellOnClick(position: string) {
     // выбор чем ходить
@@ -84,21 +113,30 @@ function Board() {
     }
 
     // переход на пустую клетку
-    if (clickedPosition && posibleMoves.includes(position) && !board[position]) {
+    if (
+      clickedPosition &&
+      posibleMoves.includes(position) &&
+      !board[position]
+    ) {
       board[clickedPosition].moveTo(position);
       delete board[clickedPosition];
       setBoard(board);
 
       setTurnOrder(turnOrderRule[turnOrder]);
-      setClickedPosition('');
+      setClickedPosition("");
       setPosibleMoves([]);
 
       return;
     }
 
     // хаваем чужую фигуру
-    if (clickedPosition && posibleMoves.includes(position) && board[position] && board[position].color !== turnOrder) {
-      board[position].moveTo('');
+    if (
+      clickedPosition &&
+      posibleMoves.includes(position) &&
+      board[position] &&
+      board[position].color !== turnOrder
+    ) {
+      board[position].moveTo("");
       delete board[position];
 
       board[clickedPosition].moveTo(position);
@@ -107,40 +145,51 @@ function Board() {
       setBoard(board);
 
       setTurnOrder(turnOrderRule[turnOrder]);
-      setClickedPosition('');
+      setClickedPosition("");
       setPosibleMoves([]);
 
       return;
     }
   }
 
+  const data = generateFigures();
+
   return (
     <>
       <div className={css.board}>
-        {indexes.map(row => <div className={css.row} key={'row' + row}>
-          {letters.map(col => {
-            const position : string = col + row;
+        {indexes.map((row) => (
+          <div className={css.row} key={"row" + row}>
+            {letters.map((col) => {
+              const position: string = col + row;
 
-            return <div
-              key={'cell' + position}
-              className={
-                cn(
-                  css.cell,
-                  css[`cell-${(row + letters.indexOf(col)) % 2 ? 'black' : 'white'}`],
-                  css[posibleMoves.indexOf(position) > -1 ? 'posible' : ''],
-                  css[board[position] ? 'figure-inside' : '']
-                )
-              }
-              onClick={cellOnClick.bind(null, position)} />
-          })}
-        </div>)}
+              return (
+                <div
+                  key={"cell" + position}
+                  className={cn(
+                    css.cell,
+                    css[
+                      `cell-${
+                        (row + letters.indexOf(col)) % 2 ? "black" : "white"
+                      }`
+                    ],
+                    css[posibleMoves.indexOf(position) > -1 ? "posible" : ""],
+                    css[board[position] ? "figure-inside" : ""]
+                  )}
+                  onClick={cellOnClick.bind(null, position)}
+                />
+              );
+            })}
+          </div>
+        ))}
 
-        {figures}
+        {/* {figures} */}
+
+        <FiguresList figures={data} />
       </div>
-      {check ? <div>CHECK</div> : ''}
-      {checkmate ? <GameOverModal/> : ''}
+      {check ? <div>CHECK</div> : ""}
+      {checkmate ? <GameOverModal /> : ""}
     </>
-  )
+  );
 }
 
-export default Board
+export default Board;
