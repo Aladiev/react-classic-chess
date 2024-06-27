@@ -18,11 +18,11 @@ const turnOrderRule: { [key: string]: string } = {
 
 function Board() {
   // const board: boardType = {};
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [board, setBoard] = useState<boardType>({});
 
-  const newBoard = useSelector(boardSelector);
+  const newBoard: boardType = useSelector(boardSelector);
 
   const [check, setCheck] = useState(false);
   const [checkmate, setCheckmate] = useState(false);
@@ -98,9 +98,9 @@ function Board() {
     if (checkingResult.checkmate != checkmate) setCheckmate(!checkmate);
   });
 
-  useEffect(() => {
-    dispatch();
-  }, []);
+  // useEffect(() => {
+  //   dispatch();
+  // }, []);
 
   // клик по клетке или фигуре
   function cellOnClick(position: string) {
@@ -152,7 +152,7 @@ function Board() {
     }
   }
 
-  const data = generateFigures();
+  const data = generateFigures(newBoard, clickedPosition, cellOnClick);
 
   return (
     <>
@@ -184,7 +184,7 @@ function Board() {
 
         {/* {figures} */}
 
-        <FiguresList figures={data} />
+        {data && <FiguresList figures={data} newBoard={newBoard} />}
       </div>
       {check ? <div>CHECK</div> : ""}
       {checkmate ? <GameOverModal /> : ""}
