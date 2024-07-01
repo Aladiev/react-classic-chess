@@ -11,3 +11,11 @@ export const clickedPositionSelector = (state: RootState) => {
 export const posibleMovesSelector = (state: RootState) => {
   return state.chess.posibleMoves;
 }
+
+export const checkSelector = (state: RootState) => {
+  return state.chess.check;
+}
+
+export const checkmateSelector = (state: RootState) => {
+  return state.chess.checkmate;
+}

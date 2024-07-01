@@ -1,6 +1,7 @@
 import { cloneBoard } from "../../board/cloneBoard";
 import { boardType } from "../../board/types";
 import { letters, indexes } from "../../board/config.json";
+import { canMove } from "../../../redux/slice/chess";
 
 export default function canMoveKing(color: string, from: string, board: boardType, recurse = true) {
     const [col, _] = from.split('');
@@ -38,7 +39,7 @@ export default function canMoveKing(color: string, from: string, board: boardTyp
 
           let positions: string[];
 
-          positions = boardCopy[position].type === 'king' ? boardCopy[position].canMove(false) : boardCopy[position].canMove();
+          positions = boardCopy[position].type === 'king' ? canMove(boardCopy, position, false) : canMove(boardCopy, position);
 
           positions.forEach(somePosition => enemiesPosibleMoves.add(somePosition))
         }

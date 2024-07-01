@@ -6,8 +6,10 @@ import canMoveQueen from "../../components/figures/queen/canMoveQueen";
 import canMoveKnight from "../../components/figures/knight/canMoveKnight";
 import canMoveKing from "../../components/figures/king/canMoveKing";
 import canMoveBishop from "../../components/figures/bishop/canMoveBishop";
+import { cloneBoard } from "../../components/board/cloneBoard";
+import { kingUnderAttack } from "../../components/board/kingUnderAttack";
 
-function canMove(board: any, startPosition: any) {
+export function canMove(board: any, startPosition: any, recursion = true) {
   const figure = board[startPosition]
 
   switch (figure.type) {
@@ -18,7 +20,7 @@ function canMove(board: any, startPosition: any) {
     case 'queen':
       return canMoveQueen(figure.color, startPosition, board, false);
     case 'king':
-      return canMoveKing(figure.color, startPosition, board, false);
+      return canMoveKing(figure.color, startPosition, board, recursion);
     case 'knight':
       return canMoveKnight(figure.color, startPosition, board, false);
     case 'bishop':
@@ -26,6 +28,60 @@ function canMove(board: any, startPosition: any) {
     default:
       return [];
   }
+}
+
+function checkForCheckmate(board: any) {
+  const result = { check: false, checkmate: false };
+
+  for (const position in board) {
+    if (!board[position]) continue;
+
+    const posibles = canMove(board, position);
+
+    for (const posiblePosition of posibles) {
+      if (
+        board[posiblePosition] &&
+        board[posiblePosition].type === "king" &&
+        board[posiblePosition].color !== board[position].color
+      ) {
+        result.check = true;
+
+        const kingMoves = canMove(board, position);
+
+        if (!kingMoves.length) {
+          let flag = true;
+
+          for (const friendPosition in board) {
+            if (
+              !board[friendPosition] ||
+              board[friendPosition].color !== board[posiblePosition].color ||
+              board[friendPosition].type === "king"
+            )
+              continue;
+
+            const friendMoves = canMove(board, friendPosition);
+
+            for (const friendMove of friendMoves) {
+              const boardCopy = cloneBoard(board);
+
+              boardCopy[friendMove] = boardCopy[friendPosition];
+              delete boardCopy[friendPosition];
+
+              const checkAfterFriendMove = kingUnderAttack(
+                boardCopy,
+                board[posiblePosition].color
+              );
+
+              if (!checkAfterFriendMove) flag = false;
+            }
+          }
+
+          if (flag) result.checkmate = true;
+        }
+      }
+    }
+  }
+  return result;
 }
 
 const turnOrderRule: { [key: string]: string } = {
@@ -40,6 +96,8 @@ const chess = createSlice({
     clickedPosition: '',
     posibleMoves: [] as string[],
     turnOrder: "white",
+    check: false,
+    checkmate: false,
   },
   reducers: {
     initBoardWithFigures: (state, { payload: data }) => {
@@ -66,7 +124,7 @@ const chess = createSlice({
         state.posibleMoves.includes(clickedPosition) &&
         !state.board[clickedPosition]
       ) {
-        state.board = {...state.board, [clickedPosition]: state.board[state.clickedPosition]}
+        state.board = { ...state.board, [clickedPosition]: state.board[state.clickedPosition] }
         state.board[clickedPosition].position = clickedPosition;
         delete state.board[state.clickedPosition];
 
@@ -74,6 +132,11 @@ const chess = createSlice({
 
         state.clickedPosition = '';
         state.posibleMoves = [];
+
+        const { check, checkmate } = checkForCheckmate(state.board);
+
+        state.check = check;
+        state.checkmate = checkmate;
 
         return;
       }
@@ -85,7 +148,7 @@ const chess = createSlice({
         state.board[clickedPosition] &&
         state.board[clickedPosition].color !== state.turnOrder
       ) {
-        state.board = {...state.board, [clickedPosition]: state.board[state.clickedPosition]}
+        state.board = { ...state.board, [clickedPosition]: state.board[state.clickedPosition] }
         state.board[clickedPosition].position = clickedPosition;
         delete state.board[state.clickedPosition]
 
@@ -93,6 +156,11 @@ const chess = createSlice({
 
         state.clickedPosition = '';
         state.posibleMoves = [];
+
+        const { check, checkmate } = checkForCheckmate(state.board);
+
+        state.check = check;
+        state.checkmate = checkmate;
 
         return;
       }
