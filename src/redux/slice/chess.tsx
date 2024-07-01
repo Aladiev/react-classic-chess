@@ -3,16 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const chess = createSlice({
   name: "chess",
   initialState: {
-    initialBoard: {} as any,
+    board: {} as any,
   },
   reducers: {
-    initBoardWithFigures: (state, action) => {
-      const data = action.payload;
-      const key = action.payload.positionFigure;
+    initBoardWithFigures: (state, { payload: data }) => {
+      const key = data.positionFigure;
       delete data.positionFigure;
 
-      state.initialBoard = {
-        ...state.initialBoard,
+      state.board = {
+        ...state.board,
         ...{
           [key]: data,
         },

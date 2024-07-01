@@ -1,9 +1,3 @@
-// import Bishop from "../figures/bishop/Bishop";
-// import King from "../figures/king/King";
-// import Knight from "../figures/knight/Knight";
-// import Pawn from "../figures/pawn/Pawn";
-// import Queen from "../figures/queen/Queen";
-// import Rook from "../figures/rook/Rook";
 import { boardType } from "./types";
 import { letters } from "./config.json";
 
@@ -18,7 +12,7 @@ export default function generateFigures(
     figures.push({
       type: "pawn",
       board,
-      letter,
+      position: 'position' + letter + '7',
       color: "black",
       onClick: cellOnClick,
       clickedPosition: clickedPosition,
@@ -27,7 +21,7 @@ export default function generateFigures(
     figures.push({
       type: "pawn",
       board,
-      letter,
+      position: 'position' + letter + '2',
       color: "white",
       onClick: cellOnClick,
       clickedPosition,
@@ -39,6 +33,7 @@ export default function generateFigures(
     board,
     color: "white",
     onClick: cellOnClick,
+    position: 'positionE1',
     clickedPosition,
   });
   figures.push({
@@ -46,6 +41,7 @@ export default function generateFigures(
     board,
     color: "black",
     onClick: cellOnClick,
+    position: 'positionE8',
     clickedPosition,
   });
 
@@ -54,6 +50,7 @@ export default function generateFigures(
     board,
     color: "white",
     onClick: cellOnClick,
+    position: 'positionD1',
     clickedPosition,
   });
   figures.push({
@@ -61,13 +58,14 @@ export default function generateFigures(
     board,
     color: "black",
     onClick: cellOnClick,
+    position: 'positionD8',
     clickedPosition,
   });
 
   figures.push({
     type: "rook",
     board,
-    letter: "A",
+    position: 'positionA1',
     color: "white",
     onClick: cellOnClick,
     clickedPosition,
@@ -75,7 +73,7 @@ export default function generateFigures(
   figures.push({
     type: "rook",
     board,
-    letter: "A",
+    position: 'positionA8',
     color: "black",
     onClick: cellOnClick,
     clickedPosition,
@@ -84,7 +82,7 @@ export default function generateFigures(
   figures.push({
     type: "rook",
     board,
-    letter: "H",
+    position: 'positionH1',
     color: "white",
     onClick: cellOnClick,
     clickedPosition,
@@ -92,7 +90,7 @@ export default function generateFigures(
   figures.push({
     type: "rook",
     board,
-    letter: "H",
+    position: 'positionH8',
     color: "black",
     onClick: cellOnClick,
     clickedPosition,
@@ -101,7 +99,7 @@ export default function generateFigures(
   figures.push({
     type: "bishop",
     board,
-    letter: "C",
+    position: 'positionC1',
     color: "white",
     onClick: cellOnClick,
     clickedPosition,
@@ -109,7 +107,7 @@ export default function generateFigures(
   figures.push({
     type: "bishop",
     board,
-    letter: "C",
+    position: 'positionC8',
     color: "black",
     onClick: cellOnClick,
     clickedPosition,
@@ -118,7 +116,7 @@ export default function generateFigures(
   figures.push({
     type: "bishop",
     board,
-    letter: "F",
+    position: 'positionF1',
     color: "white",
     onClick: cellOnClick,
     clickedPosition,
@@ -126,7 +124,7 @@ export default function generateFigures(
   figures.push({
     type: "bishop",
     board,
-    letter: "F",
+    position: 'positionF8',
     color: "black",
     onClick: cellOnClick,
     clickedPosition,
@@ -135,7 +133,7 @@ export default function generateFigures(
   figures.push({
     type: "knight",
     board,
-    letter: "B",
+    position: 'positionB1',
     color: "white",
     onClick: cellOnClick,
     clickedPosition,
@@ -143,7 +141,7 @@ export default function generateFigures(
   figures.push({
     type: "knight",
     board,
-    letter: "B",
+    position: 'positionB8',
     color: "black",
     onClick: cellOnClick,
     clickedPosition,
@@ -152,7 +150,7 @@ export default function generateFigures(
   figures.push({
     type: "knight",
     board,
-    letter: "G",
+    position: 'positionG1',
     color: "white",
     onClick: cellOnClick,
     clickedPosition,
@@ -160,7 +158,7 @@ export default function generateFigures(
   figures.push({
     type: "knight",
     board,
-    letter: "G",
+    position: 'positionG8',
     color: "black",
     onClick: cellOnClick,
     clickedPosition,
