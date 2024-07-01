@@ -1,22 +1,22 @@
+import { useSelector } from "react-redux";
+import { boardType } from "../../components/board/types";
 import Figure from "../Figure/Figure";
+import { boardSelector } from "../../redux/selectors/selectors";
 
 const FiguresList = ({
-  figures,
-  newBoard,
+
 }: {
-  figures: any[];
-  newBoard: any;
 }) => {
+  const newBoard: boardType = useSelector(boardSelector);
+
   return (
     <>
-      {figures.map((item, key) => (
+      {Object.values(newBoard).map((item, key) => (
         <Figure
           key={key}
           color={item.color}
           type={item.type}
           position={item.position}
-          letter={item.letter}
-          newBoard={newBoard}
         />
       ))}
     </>

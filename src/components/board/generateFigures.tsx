@@ -1,167 +1,109 @@
-import { boardType } from "./types";
 import { letters } from "./config.json";
 
-export default function generateFigures(
-  board: boardType,
-  clickedPosition: string,
-  cellOnClick: Function
-) {
+export default function generateFigures() {
   const figures = [];
 
   for (const letter of letters) {
     figures.push({
       type: "pawn",
-      board,
-      position: 'position' + letter + '7',
+      position: letter + '7',
       color: "black",
-      onClick: cellOnClick,
-      clickedPosition: clickedPosition,
+
       uid: letter,
     });
     figures.push({
       type: "pawn",
-      board,
-      position: 'position' + letter + '2',
+      position: letter + '2',
       color: "white",
-      onClick: cellOnClick,
-      clickedPosition,
     });
   }
 
   figures.push({
     type: "king",
-    board,
     color: "white",
-    onClick: cellOnClick,
-    position: 'positionE1',
-    clickedPosition,
+    position: 'E1',
   });
   figures.push({
     type: "king",
-    board,
     color: "black",
-    onClick: cellOnClick,
-    position: 'positionE8',
-    clickedPosition,
+    position: 'E8',
   });
 
   figures.push({
     type: "queen",
-    board,
     color: "white",
-    onClick: cellOnClick,
-    position: 'positionD1',
-    clickedPosition,
+    position: 'D1',
   });
   figures.push({
     type: "queen",
-    board,
     color: "black",
-    onClick: cellOnClick,
-    position: 'positionD8',
-    clickedPosition,
+    position: 'D8',
   });
 
   figures.push({
     type: "rook",
-    board,
-    position: 'positionA1',
+    position: 'A1',
     color: "white",
-    onClick: cellOnClick,
-    clickedPosition,
   });
   figures.push({
     type: "rook",
-    board,
-    position: 'positionA8',
+    position: 'A8',
     color: "black",
-    onClick: cellOnClick,
-    clickedPosition,
   });
 
   figures.push({
     type: "rook",
-    board,
-    position: 'positionH1',
+    position: 'H1',
     color: "white",
-    onClick: cellOnClick,
-    clickedPosition,
   });
   figures.push({
     type: "rook",
-    board,
-    position: 'positionH8',
+    position: 'H8',
     color: "black",
-    onClick: cellOnClick,
-    clickedPosition,
   });
 
   figures.push({
     type: "bishop",
-    board,
-    position: 'positionC1',
+    position: 'C1',
     color: "white",
-    onClick: cellOnClick,
-    clickedPosition,
   });
   figures.push({
     type: "bishop",
-    board,
-    position: 'positionC8',
+    position: 'C8',
     color: "black",
-    onClick: cellOnClick,
-    clickedPosition,
   });
 
   figures.push({
     type: "bishop",
-    board,
-    position: 'positionF1',
+    position: 'F1',
     color: "white",
-    onClick: cellOnClick,
-    clickedPosition,
   });
   figures.push({
     type: "bishop",
-    board,
-    position: 'positionF8',
+    position: 'F8',
     color: "black",
-    onClick: cellOnClick,
-    clickedPosition,
   });
 
   figures.push({
     type: "knight",
-    board,
-    position: 'positionB1',
+    position: 'B1',
     color: "white",
-    onClick: cellOnClick,
-    clickedPosition,
   });
   figures.push({
     type: "knight",
-    board,
-    position: 'positionB8',
+    position: 'B8',
     color: "black",
-    onClick: cellOnClick,
-    clickedPosition,
   });
 
   figures.push({
     type: "knight",
-    board,
-    position: 'positionG1',
+    position: 'G1',
     color: "white",
-    onClick: cellOnClick,
-    clickedPosition,
   });
   figures.push({
     type: "knight",
-    board,
-    position: 'positionG8',
+    position: 'G8',
     color: "black",
-    onClick: cellOnClick,
-    clickedPosition,
   });
 
   return figures;

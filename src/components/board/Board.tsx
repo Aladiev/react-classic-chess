@@ -8,30 +8,22 @@ import { boardType, boardTypeWithoutMoving } from "./types";
 import generateFigures from "./generateFigures";
 import GameOverModal from "../gameOverModal";
 import { useDispatch, useSelector } from "react-redux";
-import { boardSelector } from "../../redux/selectors/selectors";
+import { boardSelector, clickedPositionSelector, posibleMovesSelector } from "../../redux/selectors/selectors";
 import FiguresList from "../../widgets/FiguresList/FiguresList";
+import { initBoardWithFigures, cellOnClick } from "../../redux/slice/chess";
 
-const turnOrderRule: { [key: string]: string } = {
-  white: "black",
-  black: "white",
-};
+
 
 function Board() {
-  // const board: boardType = {};
-  // const dispatch = useDispatch();
-
-  const [board, setBoard] = useState<boardType>({});
+  const dispatch = useDispatch();
 
   const newBoard: boardType = useSelector(boardSelector);
 
   const [check, setCheck] = useState(false);
   const [checkmate, setCheckmate] = useState(false);
-  const [clickedPosition, setClickedPosition] = useState("");
-  const [turnOrder, setTurnOrder] = useState("white");
-  const [posibleMoves, setPosibleMoves]: [
-    posibleMoves: string[],
-    setPosibleMoves: Function
-  ] = useState([]);
+
+
+  const posibleMoves = useSelector(posibleMovesSelector);
 
   // проверяем на шах или на мат
   function checkForCheckmate(board: boardTypeWithoutMoving) {
@@ -88,71 +80,11 @@ function Board() {
     return result;
   }
 
-  // генерим пешки
-  const figures = generateFigures(board, clickedPosition, cellOnClick);
 
   useEffect(() => {
-    const checkingResult = checkForCheckmate(board);
-
-    if (checkingResult.check != check) setCheck(!check);
-    if (checkingResult.checkmate != checkmate) setCheckmate(!checkmate);
-  });
-
-  // useEffect(() => {
-  //   dispatch();
-  // }, []);
-
-  // клик по клетке или фигуре
-  function cellOnClick(position: string) {
-    // выбор чем ходить
-    if (board[position] && board[position].color === turnOrder) {
-      setClickedPosition(position);
-
-      setPosibleMoves(board[position].canMove());
-      return;
-    }
-
-    // переход на пустую клетку
-    if (
-      clickedPosition &&
-      posibleMoves.includes(position) &&
-      !board[position]
-    ) {
-      board[clickedPosition].moveTo(position);
-      delete board[clickedPosition];
-      setBoard(board);
-
-      setTurnOrder(turnOrderRule[turnOrder]);
-      setClickedPosition("");
-      setPosibleMoves([]);
-
-      return;
-    }
-
-    // хаваем чужую фигуру
-    if (
-      clickedPosition &&
-      posibleMoves.includes(position) &&
-      board[position] &&
-      board[position].color !== turnOrder
-    ) {
-      board[position].moveTo("");
-      delete board[position];
-
-      board[clickedPosition].moveTo(position);
-      delete board[clickedPosition];
-
-      setBoard(board);
-
-      setTurnOrder(turnOrderRule[turnOrder]);
-      setClickedPosition("");
-      setPosibleMoves([]);
-
-      return;
-    }
-  }
-
-  const data = generateFigures(newBoard, clickedPosition, cellOnClick);
+    dispatch(initBoardWithFigures(generateFigures()));
+  }, []);
+  
 
   return (
     <>
@@ -173,9 +105,9 @@ function Board() {
                       }`
                     ],
                     css[posibleMoves.indexOf(position) > -1 ? "posible" : ""],
-                    css[board[position] ? "figure-inside" : ""]
+                    css[newBoard[position] ? "figure-inside" : ""]
                   )}
-                  onClick={cellOnClick.bind(null, position)}
+                  onClick={() => dispatch(cellOnClick(position))}
                 />
               );
             })}
@@ -184,7 +116,7 @@ function Board() {
 
         {/* {figures} */}
 
-        {data && <FiguresList figures={data} newBoard={newBoard} />}
+        <FiguresList />
       </div>
       {check ? <div>CHECK</div> : ""}
       {checkmate ? <GameOverModal /> : ""}
