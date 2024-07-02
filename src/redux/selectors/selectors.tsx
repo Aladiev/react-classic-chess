@@ -1,4 +1,4 @@
-import { RootState } from "../store";
+import type { RootState } from "../store";
 
 export const boardSelector = (state: RootState) => state.chess.board;
 

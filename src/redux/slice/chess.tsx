@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { canMove } from "../../shared/canMove/canMove";
-import { boardType } from "../../shared/constants/_types";
 import { checkForCheckmate } from "../../shared/checkForCheckmate";
+import type { boardType } from "../../shared/constants/_types";
 
 const turnOrderRule: { [key: string]: string } = {
   white: "black",
@@ -41,7 +41,7 @@ const chess = createSlice({
         state.posibleMoves.includes(clickedPosition) &&
         !state.board[clickedPosition]
       ) {
-        state.board = { ...state.board, [clickedPosition]: state.board[state.clickedPosition] }
+        state.board = { ...state.board, [clickedPosition]: state.board[state.clickedPosition] };
         state.board[clickedPosition].position = clickedPosition;
         delete state.board[state.clickedPosition];
 
@@ -65,9 +65,9 @@ const chess = createSlice({
         state.board[clickedPosition] &&
         state.board[clickedPosition].color !== state.turnOrder
       ) {
-        state.board = { ...state.board, [clickedPosition]: state.board[state.clickedPosition] }
+        state.board = { ...state.board, [clickedPosition]: state.board[state.clickedPosition] };
         state.board[clickedPosition].position = clickedPosition;
-        delete state.board[state.clickedPosition]
+        delete state.board[state.clickedPosition];
 
         state.turnOrder = turnOrderRule[state.turnOrder];
 

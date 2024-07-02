@@ -1,4 +1,4 @@
-import { boardType } from "../../shared/constants/_types";
+import type { boardType } from "../../shared/constants/_types";
 
 export const cloneBoard = (boardToCopy: boardType) => {
     const board: boardType = {};
@@ -8,4 +8,4 @@ export const cloneBoard = (boardToCopy: boardType) => {
     }
 
     return board;
-  }
+  };

@@ -1,21 +1,21 @@
-import { useEffect } from "react";
-import css from "./Board.module.scss";
 import cn from "classnames";
-import { letters, indexes } from "./config.json";
-import generateFigures from "./generateFigures";
-import GameOverModal from "../gameOverModal";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { boardSelector, checkmateSelector, checkSelector, posibleMovesSelector } from "../../redux/selectors/selectors";
-import FiguresList from "../../widgets/FiguresList/FiguresList";
 import { initBoardWithFigures, cellOnClick } from "../../redux/slice/chess";
-import { boardType } from "../../shared/constants/_types";
+import FiguresList from "../../widgets/FiguresList/FiguresList";
+import GameOverModal from "../gameOverModal";
+import css from "./Board.module.scss";
+import { letters, indexes } from "./config.json";
+import generateFigures from "./generateFigures";
+import type { boardType } from "../../shared/constants/_types";
 
 
 
 function Board() {
   const dispatch = useDispatch();
 
-  const newBoard: boardType = useSelector(boardSelector);
+  const board: boardType = useSelector(boardSelector);
   const posibleMoves = useSelector(posibleMovesSelector);
 
   const check = useSelector(checkSelector);
@@ -45,8 +45,8 @@ function Board() {
                         (row + letters.indexOf(col)) % 2 ? "black" : "white"
                       }`
                     ],
-                    css[posibleMoves.indexOf(position) > -1 ? "posible" : ""],
-                    css[newBoard[position] ? "figure-inside" : ""]
+                    css[posibleMoves.includes(position) ? "posible" : ""],
+                    css[board[position] ? "figure-inside" : ""]
                   )}
                   onClick={() => dispatch(cellOnClick(position))}
                 />

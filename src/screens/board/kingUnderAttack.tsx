@@ -1,5 +1,5 @@
 import { canMove } from "../../shared/canMove/canMove";
-import { boardType } from "../../shared/constants/_types";
+import type { boardType } from "../../shared/constants/_types";
 
 export const kingUnderAttack = (board: boardType, color: string) => {
   for (const position in board) {
@@ -13,4 +13,4 @@ export const kingUnderAttack = (board: boardType, color: string) => {
   }
 
   return false;
-}
+};

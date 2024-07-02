@@ -10,7 +10,7 @@ function GameOverModal() {
         <p>GG</p>
       </div>
     </>
-  )
+  );
 }
 
-export default GameOverModal
+export default GameOverModal;

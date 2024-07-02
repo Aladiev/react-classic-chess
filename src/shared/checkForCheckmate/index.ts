@@ -1,5 +1,5 @@
 import { canMove } from "../canMove/canMove";
-import { boardType } from "../constants/_types";
+import type { boardType } from "../constants/_types";
 
 export function checkForCheckmate(board: boardType) {
   const result = { check: false, checkmate: false };
@@ -19,7 +19,7 @@ export function checkForCheckmate(board: boardType) {
 
         const kingMoves = canMove(board, posiblePosition, true);
 
-        if (!kingMoves.length) {
+        if (kingMoves.length === 0) {
           let flag = true;
 
           for (const friendPosition in board) {
@@ -32,7 +32,7 @@ export function checkForCheckmate(board: boardType) {
 
             const friendMoves = canMove(board, friendPosition, true);
 
-            if (friendMoves.length) {
+            if (friendMoves.length > 0) {
               flag = false;
             }
           }

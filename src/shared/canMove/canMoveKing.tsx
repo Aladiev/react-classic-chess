@@ -1,10 +1,10 @@
 import { cloneBoard } from "../../screens/board/cloneBoard";
 import { letters, indexes } from "../../screens/board/config.json";
-import { boardType } from "../constants/_types";
 import { canMove } from "./canMove";
+import type { boardType } from "../constants/_types";
 
 export default function canMoveKing(color: string, from: string, board: boardType, recurse = true) {
-    const [col, _] = from.split('');
+    const [col, _] = [...from];
     const row = Number(_);
 
     const moves = [];
@@ -39,7 +39,7 @@ export default function canMoveKing(color: string, from: string, board: boardTyp
 
           const positions = boardCopy[position].type === 'king' ? canMove(boardCopy, position, false) : canMove(boardCopy, position, true);
 
-          positions.forEach(somePosition => enemiesPosibleMoves.add(somePosition))
+          for (const somePosition of positions) enemiesPosibleMoves.add(somePosition);
         }
 
         if (!enemiesPosibleMoves.has(kingMove)) filteredMoves.push(kingMove);

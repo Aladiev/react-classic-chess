@@ -1,8 +1,8 @@
 import cn from "classnames";
-import css from "./Figure.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { cellOnClick } from "../../redux/slice/chess";
 import { clickedPositionSelector } from "../../redux/selectors/selectors";
+import { cellOnClick } from "../../redux/slice/chess";
+import css from "./Figure.module.scss";
 
 const Figure = ({
   type,
