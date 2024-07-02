@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import css from "./Board.module.scss";
 // import { kingUnderAttack } from "./kingUnderAttack";
-import { cloneBoard } from "./cloneBoard";
+// import { cloneBoard } from "./cloneBoard";
 import cn from "classnames";
 import { letters, indexes } from "./config.json";
 import { boardType, boardTypeWithoutMoving } from "./types";
@@ -66,7 +66,7 @@ function Board() {
 
         <FiguresList />
       </div>
-      {check ? <div>CHECK</div> : ""}
+      {check ? <div className={css.check}>CHECK</div> : ""}
       {checkmate ? <GameOverModal /> : ""}
     </>
   );

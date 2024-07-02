@@ -9,22 +9,22 @@ import canMoveBishop from "../../components/figures/bishop/canMoveBishop";
 import { cloneBoard } from "../../components/board/cloneBoard";
 import { kingUnderAttack } from "../../components/board/kingUnderAttack";
 
-export function canMove(board: any, startPosition: any, recursion = true) {
+export function canMove(board: any, startPosition: any, recursion = false) {
   const figure = board[startPosition]
 
   switch (figure.type) {
     case 'rook':
-      return canMoveRook(figure.color, startPosition, board, false);
+      return canMoveRook(figure.color, startPosition, board, recursion);
     case 'pawn':
-      return canMovePawn(figure.color, startPosition, board, false);
+      return canMovePawn(figure.color, startPosition, board, recursion);
     case 'queen':
-      return canMoveQueen(figure.color, startPosition, board, false);
+      return canMoveQueen(figure.color, startPosition, board, recursion);
     case 'king':
       return canMoveKing(figure.color, startPosition, board, recursion);
     case 'knight':
-      return canMoveKnight(figure.color, startPosition, board, false);
+      return canMoveKnight(figure.color, startPosition, board, recursion);
     case 'bishop':
-      return canMoveBishop(figure.color, startPosition, board, false);
+      return canMoveBishop(figure.color, startPosition, board, recursion);
     default:
       return [];
   }
@@ -36,7 +36,7 @@ function checkForCheckmate(board: any) {
   for (const position in board) {
     if (!board[position]) continue;
 
-    const posibles = canMove(board, position);
+    const posibles = canMove(board, position, false);
 
     for (const posiblePosition of posibles) {
       if (
@@ -46,7 +46,7 @@ function checkForCheckmate(board: any) {
       ) {
         result.check = true;
 
-        const kingMoves = canMove(board, position);
+        const kingMoves = canMove(board, position, true);
 
         if (!kingMoves.length) {
           let flag = true;
@@ -59,7 +59,7 @@ function checkForCheckmate(board: any) {
             )
               continue;
 
-            const friendMoves = canMove(board, friendPosition);
+            const friendMoves = canMove(board, friendPosition, false);
 
             for (const friendMove of friendMoves) {
               const boardCopy = cloneBoard(board);
@@ -113,7 +113,7 @@ const chess = createSlice({
       // выбор чем ходить
       if (state.board[clickedPosition] && state.board[clickedPosition].color === state.turnOrder) {
         state.clickedPosition = clickedPosition;
-        state.posibleMoves = canMove(state.board, clickedPosition);
+        state.posibleMoves = canMove(state.board, clickedPosition, true);
 
         return;
       }
