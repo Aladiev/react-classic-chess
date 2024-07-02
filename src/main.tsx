@@ -1,10 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import Board from './components/board/Board.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { NavigationMenu } from "./screens/navigationMenu/index.tsx";
+import Board from "./screens/board/Board.tsx";
+import { Provider } from "react-redux";
+import store from "./redux/store.tsx";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Board />
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <NavigationMenu />
+      <Board />
+    </React.StrictMode>
+    ,
+  </Provider>
+);

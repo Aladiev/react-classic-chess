@@ -1,0 +1,20 @@
+.gameOver {
+    width: 300px;
+    height: 200px;
+
+    background-color: #B09EE0;
+
+    position: absolute;
+
+    left: 50%;
+    top: 200px;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+    
+}
+
+.gameOver p {
+    line-height: 200px;
+}
