@@ -4,7 +4,7 @@ export const cloneBoard = (boardToCopy: boardType) => {
     const board: boardType = {};
 
     for (const position in boardToCopy) {
-      board[position] = { color: boardToCopy[position].color, type: boardToCopy[position].type, position }
+      board[position] = { ...boardToCopy[position] };
     }
 
     return board;
