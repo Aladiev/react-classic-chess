@@ -3,7 +3,7 @@ import { letters, indexes } from "../../screens/board/config.json";
 import { canMove } from "./canMove";
 import type { boardType } from "../constants/_types";
 
-export default function canMoveKing(color: string, from: string, board: boardType, recurse = true) {
+export default function canMoveKing(color: string, from: string, board: boardType, recurse: boolean) {
     const [col, _] = [...from];
     const row = Number(_);
 
