@@ -37,9 +37,7 @@ export default function canMoveKing(color: string, from: string, board: boardTyp
         for (const position in boardCopy) {
           if (!boardCopy[position] || boardCopy[position].color === color) continue;
 
-          let positions: string[];
-
-          positions = boardCopy[position].type === 'king' ? canMove(boardCopy, position, false) : canMove(boardCopy, position, true);
+          const positions = boardCopy[position].type === 'king' ? canMove(boardCopy, position, false) : canMove(boardCopy, position, true);
 
           positions.forEach(somePosition => enemiesPosibleMoves.add(somePosition))
         }
@@ -47,7 +45,7 @@ export default function canMoveKing(color: string, from: string, board: boardTyp
         if (!enemiesPosibleMoves.has(kingMove)) filteredMoves.push(kingMove);
       }
 
-      return filteredMoves;;
+      return filteredMoves;
     }
 
     return moves;

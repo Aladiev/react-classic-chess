@@ -1,12 +1,9 @@
 import { useSelector } from "react-redux";
-import { boardType } from "../../screens/board/types";
 import Figure from "../Figure/Figure";
 import { boardSelector } from "../../redux/selectors/selectors";
+import { boardType } from "../../shared/constants/_types";
 
-const FiguresList = ({
-
-}: {
-}) => {
+const FiguresList = () => {
   const newBoard: boardType = useSelector(boardSelector);
 
   return (

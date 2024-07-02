@@ -24,7 +24,7 @@ function Board() {
 
   useEffect(() => {
     dispatch(initBoardWithFigures(generateFigures()));
-  }, []);
+  }, [dispatch]);
   
 
   return (

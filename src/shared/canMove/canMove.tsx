@@ -1,3 +1,4 @@
+import { boardType } from "../constants/_types";
 import canMoveBishop from "./canMoveBishop";
 import canMoveKing from "./canMoveKing";
 import canMoveKnight from "./canMoveKnight";
@@ -6,7 +7,7 @@ import canMoveQueen from "./canMoveQueen";
 import canMoveRook from "./canMoveRook";
 
 
-export function canMove(board: any, startPosition: any, recursion = false) {
+export function canMove(board: boardType, startPosition: string, recursion = false) {
   const figure = board[startPosition]
 
   switch (figure.type) {
