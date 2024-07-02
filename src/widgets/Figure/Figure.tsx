@@ -13,8 +13,6 @@ const Figure = ({
   color: string;
   position: string;
 }) => {
-  // if (type === 'knight') console.log(position);
-
   const dispatch = useDispatch();
 
   const clickedPosition = useSelector(clickedPositionSelector);

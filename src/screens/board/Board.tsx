@@ -1,16 +1,14 @@
 import { useEffect } from "react";
 import css from "./Board.module.scss";
-// import { kingUnderAttack } from "./kingUnderAttack";
-// import { cloneBoard } from "./cloneBoard";
 import cn from "classnames";
 import { letters, indexes } from "./config.json";
-import { boardType, boardTypeWithoutMoving } from "./types";
 import generateFigures from "./generateFigures";
 import GameOverModal from "../gameOverModal";
 import { useDispatch, useSelector } from "react-redux";
-import { boardSelector, checkmateSelector, checkSelector, clickedPositionSelector, posibleMovesSelector } from "../../redux/selectors/selectors";
+import { boardSelector, checkmateSelector, checkSelector, posibleMovesSelector } from "../../redux/selectors/selectors";
 import FiguresList from "../../widgets/FiguresList/FiguresList";
 import { initBoardWithFigures, cellOnClick } from "../../redux/slice/chess";
+import { boardType } from "../../shared/constants/_types";
 
 
 
@@ -20,13 +18,8 @@ function Board() {
   const newBoard: boardType = useSelector(boardSelector);
   const posibleMoves = useSelector(posibleMovesSelector);
 
-
   const check = useSelector(checkSelector);
   const checkmate = useSelector(checkmateSelector);
-  
-
-  // проверяем на шах или на мат
-  
 
 
   useEffect(() => {
@@ -61,8 +54,6 @@ function Board() {
             })}
           </div>
         ))}
-
-        {/* {figures} */}
 
         <FiguresList />
       </div>

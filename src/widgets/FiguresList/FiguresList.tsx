@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { boardType } from "../../components/board/types";
+import { boardType } from "../../screens/board/types";
 import Figure from "../Figure/Figure";
 import { boardSelector } from "../../redux/selectors/selectors";
 

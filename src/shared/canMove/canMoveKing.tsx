@@ -1,7 +1,7 @@
-import { cloneBoard } from "../../board/cloneBoard";
-import { boardType } from "../../board/types";
-import { letters, indexes } from "../../board/config.json";
-import { canMove } from "../../../redux/slice/chess";
+import { cloneBoard } from "../../screens/board/cloneBoard";
+import { letters, indexes } from "../../screens/board/config.json";
+import { boardType } from "../constants/_types";
+import { canMove } from "./canMove";
 
 export default function canMoveKing(color: string, from: string, board: boardType, recurse = true) {
     const [col, _] = from.split('');

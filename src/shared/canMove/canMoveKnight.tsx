@@ -1,7 +1,7 @@
-import { cloneBoard } from "../../board/cloneBoard";
-import { kingUnderAttack } from "../../board/kingUnderAttack";
-import { boardType } from "../../board/types";
-import { letters, indexes } from "../../board/config.json";
+import { cloneBoard } from "../../screens/board/cloneBoard";
+import { kingUnderAttack } from "../../screens/board/kingUnderAttack";
+import { letters, indexes } from "../../screens/board/config.json";
+import { boardType } from "../constants/_types";
 
 export default function canMoveKnight(color: string, from: string, board: boardType, recurse = true) {
     const [col, _] = from.split('');

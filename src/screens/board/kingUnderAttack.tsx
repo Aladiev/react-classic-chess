@@ -1,8 +1,5 @@
-import { canMove } from "../../redux/slice/chess";
-import { boardType } from "./types";
-
-type boardTypeWithoutMoving = { [key: string]: { color: string, type: string, canMove: Function } };
-
+import { canMove } from "../../shared/canMove/canMove";
+import { boardType } from "../../shared/constants/_types";
 
 export const kingUnderAttack = (board: boardType, color: string) => {
   for (const position in board) {

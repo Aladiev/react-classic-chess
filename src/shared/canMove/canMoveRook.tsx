@@ -1,9 +1,9 @@
-import { boardType } from "../../board/types";
-import { letters, indexes } from "../../board/config.json";
-import { cloneBoard } from "../../board/cloneBoard";
-import { kingUnderAttack } from "../../board/kingUnderAttack";
+import { letters, indexes } from "../../screens/board/config.json";
+import { cloneBoard } from "../../screens/board/cloneBoard";
+import { kingUnderAttack } from "../../screens/board/kingUnderAttack";
+import { boardType } from "../constants/_types";
 
-export default function canMoveBishop(color: string, from: string, board: boardType, recurse = true) {
+export default function canMoveRook(color: string, from: string, board: boardType, recurse = true) {
     const [col, _] = from.split('');
     const row = Number(_);
 
@@ -12,8 +12,8 @@ export default function canMoveBishop(color: string, from: string, board: boardT
     const indexCol = letters.indexOf(col);
     const indexRow = indexes.indexOf(row);
 
-    for (let i = 1; indexCol + i < letters.length && indexRow + i < indexes.length; i++) {
-        const position = letters[indexCol + i] + indexes[indexRow + i];
+    for (let i = indexCol + 1; i < letters.length; i++) {
+        const position = letters[i] + indexes[indexRow];
 
         if (board[position]) {
             if (board[position].color !== color) moves.push(position);
@@ -24,8 +24,8 @@ export default function canMoveBishop(color: string, from: string, board: boardT
         moves.push(position);
     }
 
-    for (let i = 1; indexCol - i >= 0 && indexRow - i >= 0; i++) {
-        const position = letters[indexCol - i] + indexes[indexRow - i];
+    for (let i = indexCol - 1; i >= 0; i--) {
+        const position = letters[i] + indexes[indexRow];
 
         if (board[position]) {
             if (board[position].color !== color) moves.push(position);
@@ -36,8 +36,8 @@ export default function canMoveBishop(color: string, from: string, board: boardT
         moves.push(position);
     }
 
-    for (let i = 1; indexCol + i < letters.length && indexRow - i >= 0; i++) {
-        const position = letters[indexCol + i] + indexes[indexRow - i];
+    for (let i = indexRow + 1; i < indexes.length; i++) {
+        const position = letters[indexCol] + indexes[i];
 
         if (board[position]) {
             if (board[position].color !== color) moves.push(position);
@@ -48,8 +48,8 @@ export default function canMoveBishop(color: string, from: string, board: boardT
         moves.push(position);
     }
 
-    for (let i = 1; indexCol - i >= 0 && indexRow + i < indexes.length; i++) {
-        const position = letters[indexCol - i] + indexes[indexRow + i];
+    for (let i = indexRow - 1; i >= 0; i--) {
+        const position = letters[indexCol] + indexes[i];
 
         if (board[position]) {
             if (board[position].color !== color) moves.push(position);
