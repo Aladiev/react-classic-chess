@@ -1,0 +1,93 @@
+.figure {
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  background-size: 100px;
+
+  z-index: 1;
+
+  &_bishop {
+    &_white {
+      background-image: url("../../assets/figures/Chess_tile_bl.svg");
+    }
+
+    &_black {
+      background-image: url("../../assets/figures/Chess_tile_bd.svg");
+    }
+  }
+  &_knight {
+    &_white {
+      background-image: url("../../assets/figures/Chess_tile_nl.svg");
+    }
+    
+    &_black {
+      background-image: url("../../assets/figures/Chess_tile_nd.svg");
+    }
+  }
+
+  &_pawn {
+    &_white {
+      background-image: url("../../assets/figures/Chess_tile_pl.svg");
+    }
+    
+    &_black {
+      background-image: url("../../assets/figures/Chess_tile_pd.svg");
+    }
+  }
+
+  &_queen {
+    &_white {
+      background-image: url("../../assets/figures/Chess_tile_ql-whitebg.svg");
+    }
+    
+    &_black {
+      background-image: url("../../assets/figures/Chess_tile_qd.svg");
+    }
+  }
+  &_rook {
+    &_white {
+      background-image: url("../../assets/figures/whitebg.svg");
+    }
+    
+    &_black {
+      background-image: url("../../assets/figures/Chess_tile_rd.svg");
+    }
+  }
+  &_king {
+    &_white {
+      background-image: url("../../assets/figures/Chess_tile_kl-whitebg.svg");
+    }
+    
+    &_black {
+      background-image: url("../../assets/figures/Chess_tile_kd.svg");
+    }
+  }
+}
+
+$letter-col: (
+  A: 0,
+  B: 1,
+  C: 2,
+  D: 3,
+  E: 4,
+  F: 5,
+  G: 6,
+  H: 7,
+);
+
+/* Positions */
+@for $i from 1 through 8 {
+  @each $letter, $col in $letter-col {
+    .#{$letter}#{$i} { top: 100px * (8 - $i); left: 100px * $col; }
+  }
+}
+
+.clicked:not(.beaten) {
+  background-color: yellow;
+}
+
+.beaten {
+  display: none;
+}
