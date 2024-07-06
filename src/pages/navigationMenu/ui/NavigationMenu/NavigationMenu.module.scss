@@ -1,0 +1,71 @@
+.navigationMenu {
+    width: 100px;
+    height: 100%;
+
+    position: fixed;
+
+    background-color: rgb(5, 197, 47);
+}
+
+.page {
+    display: block;
+
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+
+    background-size: 70px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+
+    &:hover {
+        transition-duration: 0.2s;
+        background-size: 75px;
+
+        &::after {
+            color:black;
+        
+            display: inline-block;
+        
+            position: absolute;
+        
+            z-index: 1;
+        
+            left: 100%;
+        
+            width: 200px;
+            height: 100px;
+            line-height: 100px;
+        
+            background-color: rgb(130, 242, 105);
+        
+            text-align: center;
+        }
+    }
+}
+
+.profilePage {
+    background-image: url('/free-icon-user-149071.png');
+    
+    &::before {
+        content: '';
+    
+        position: absolute;
+    
+        width: 100px;
+        height: 5px;
+    
+        background-color: black;
+    
+        bottom: 0;
+    }
+}
+
+.playPage {
+    background-image: url('../../../../entities/chess/assets/figures/Chess_tile_rd.svg');
+
+    &:hover::after {
+        content: 'Играть';
+    }
+}

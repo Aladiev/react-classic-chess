@@ -1,58 +1,4 @@
-.board {
-    border: 1px solid black;
-
-    position: relative;
-
-    left: 50%;
-    top: 100px;
-
-    transform: translateX(-50%);
-
-    width: 800px;
-}
-
-.row {
-    position: relative;
-
-    height: 100px;
-}
-
-.cell {
-    position: relative;
-
-    display: inline-block;
-
-    width: 100px;
-    height: 100px;
-
-    margin: 0;
-}
-
-.row::after {
-    display: block;
-
-    position: absolute;
-
-    left: -40px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    font-weight: 700;
-}
-
-.row:nth-child(8) .cell::before {
-    display: block;
-
-    position: absolute;
-
-    left: 50%;
-    bottom: -40px;
-
-    transform: translateX(-50%);
-
-    font-weight: 700;
-}
+@import '../../../../entities/chess/config/cell-size';
 
 $letter-col: (
   'A': 1,
@@ -65,48 +11,105 @@ $letter-col: (
   'H': 8,
 );
 
-@for $i from 1 through 8 {
-    .row:nth-child(#{$i})::after {content: '#{9 - $i}'}
-}
+.board {
+    border: 1px solid black;
 
-@each $letter, $col in $letter-col {
-    .row:nth-child(8) .cell:nth-child(#{$col}):before { content: $letter }
-}
+    position: relative;
 
-
-.cell-black {
-    background-color: #bb7843;
-}
-
-.cell-white {
-    background-color: #e1c294;
-}
-
-.posible::after {
-    content: '';
-
-    display: block;
-
-    position: absolute;
-
-    top: 50%;
     left: 50%;
+    top: $cell-size;
 
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+
+    width: $cell-size * 8;
 }
 
-.figure-inside.posible::after {
-    width: 95px;
-    height: 95px;
+.row {
+    position: relative;
 
-    border: 3px solid green;
+    height: $cell-size;
+
+    @for $i from 1 through 8 {
+        &:nth-child(#{$i})::after {content: '#{9 - $i}'}
+    }
+
+    @each $letter, $col in $letter-col {
+        &:nth-child(8) .cell:nth-child(#{$col}):before { content: $letter }
+    }
+
+    &:nth-child(8) .cell::before {
+        display: block;
+    
+        position: absolute;
+    
+        left: 50%;
+        bottom: -40px;
+    
+        transform: translateX(-50%);
+    
+        font-weight: 700;
+    }
+
+    &::after {
+        display: block;
+    
+        position: absolute;
+    
+        left: -40px;
+        top: 50%;
+    
+        transform: translateY(-50%);
+    
+        font-weight: 700;
+    }
 }
 
-.posible:not(.figure-inside)::after {
-    width: 15px;
-    height: 15px;
+.cell {
+    position: relative;
 
-    background-color: green;
+    display: inline-block;
 
-    border-radius: 50%;
+    width: $cell-size;
+    height: $cell-size;
+
+    margin: 0;
+
+    &-black {
+        background-color: #bb7843;
+    }
+
+    &-white {
+        background-color: #e1c294;
+    }
+}
+
+.posible {
+    &::after {
+        content: '';
+    
+        display: block;
+    
+        position: absolute;
+    
+        top: 50%;
+        left: 50%;
+    
+        transform: translate(-50%, -50%);
+    }
+
+    &:not(.figure-inside)::after {
+        width: calc($cell-size / 6);
+        height: calc($cell-size / 6);
+    
+        background-color: green;
+    
+        border-radius: 50%;
+    }
+
+    &.figure-inside::after {
+        width: $cell-size - 5px;
+        height: $cell-size - 5px;
+    
+        border: 3px solid green;
+    }
 }
