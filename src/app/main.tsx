@@ -6,9 +6,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 
 import { store } from "../widgets/chess";
-import { NavigationMenu } from "../paiges/navigationMenu";
-import { ChessGame } from "../paiges/chess";
-import { ProfilePage } from "../paiges/profile";
+import { NavigationMenu } from "../pages/navigationMenu";
+import { ChessGame } from "../pages/chess";
+import { ProfilePage } from "../pages/profile";
 
 
 ReactDOM.createRoot(document.querySelector("#root")!).render(
