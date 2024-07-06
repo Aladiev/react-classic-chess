@@ -41,38 +41,6 @@
     font-weight: 700;
 }
 
-.row:nth-child(1)::after {
-    content: '8'
-}
-
-.row:nth-child(2)::after {
-    content: '7'
-}
-
-.row:nth-child(3)::after {
-    content: '6'
-}
-
-.row:nth-child(4)::after {
-    content: '5'
-}
-
-.row:nth-child(5)::after {
-    content: '4'
-}
-
-.row:nth-child(6)::after {
-    content: '3'
-}
-
-.row:nth-child(7)::after {
-    content: '2'
-}
-
-.row:nth-child(8)::after {
-    content: '1'
-}
-
 .row:nth-child(8) .cell::before {
     display: block;
 
@@ -86,37 +54,25 @@
     font-weight: 700;
 }
 
-.row:nth-child(8) .cell:nth-child(1):before {
-    content: 'A'
+$letter-col: (
+  'A': 1,
+  'B': 2,
+  'C': 3,
+  'D': 4,
+  'E': 5,
+  'F': 6,
+  'G': 7,
+  'H': 8,
+);
+
+@for $i from 1 through 8 {
+    .row:nth-child(#{$i})::after {content: '#{9 - $i}'}
 }
 
-.row:nth-child(8) .cell:nth-child(2):before {
-    content: 'B'
+@each $letter, $col in $letter-col {
+    .row:nth-child(8) .cell:nth-child(#{$col}):before { content: $letter }
 }
 
-.row:nth-child(8) .cell:nth-child(3):before {
-    content: 'C'
-}
-
-.row:nth-child(8) .cell:nth-child(4):before {
-    content: 'D'
-}
-
-.row:nth-child(8) .cell:nth-child(5):before {
-    content: 'E'
-}
-
-.row:nth-child(8) .cell:nth-child(6):before {
-    content: 'F'
-}
-
-.row:nth-child(8) .cell:nth-child(7):before {
-    content: 'G'
-}
-
-.row:nth-child(8) .cell:nth-child(8):before {
-    content: 'H'
-}
 
 .cell-black {
     background-color: #bb7843;
