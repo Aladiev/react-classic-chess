@@ -9,3 +9,5 @@ export const posibleMovesSelector = (state: RootState) => state.chess.posibleMov
 export const checkSelector = (state: RootState) => state.chess.check;
 
 export const checkmateSelector = (state: RootState) => state.chess.checkmate;
+
+export const turnOrderSelector = (state: RootState) => state.chess.turnOrder;

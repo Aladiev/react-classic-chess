@@ -1,10 +1,12 @@
+@import '../../../../entities/chess/config/cell-size';
+
 .figure {
   position: absolute;
 
-  width: 100px;
-  height: 100px;
+  width: $cell-size;
+  height: $cell-size;
 
-  background-size: 100px;
+  background-size: $cell-size;
 
   z-index: 1;
 
@@ -80,14 +82,10 @@ $letter-col: (
 /* Positions */
 @for $i from 1 through 8 {
   @each $letter, $col in $letter-col {
-    .#{$letter}#{$i} { top: 100px * (8 - $i); left: 100px * $col; }
+    .#{$letter}#{$i} { top: $cell-size * (8 - $i); left: $cell-size * $col; }
   }
 }
 
-.clicked:not(.beaten) {
+.clicked {
   background-color: yellow;
-}
-
-.beaten {
-  display: none;
 }
