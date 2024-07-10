@@ -1,14 +1,29 @@
-@import '../../../../entities/chess/config/cell-size';
+@import "../../../../entities/chess/config/cell-size";
+@import "../../../../shared/constants/scss/helpers.scss";
 
 .figure {
   position: absolute;
-
+  background: $mainRed;
   width: $cell-size;
   height: $cell-size;
 
   background-size: $cell-size;
 
   z-index: 1;
+
+  @include breakpoint(sm) {
+    background: blue;
+  }
+  @include breakpoint(md) {
+    background: green;
+  }
+
+  @include breakpoint(lg) {
+    background: aqua;
+  }
+  @include breakpoint(xl) {
+    background: gray;
+  }
 
   &_bishop {
     &_white {
@@ -23,7 +38,7 @@
     &_white {
       background-image: url("../../assets/figures/Chess_tile_nl.svg");
     }
-    
+
     &_black {
       background-image: url("../../assets/figures/Chess_tile_nd.svg");
     }
@@ -33,7 +48,7 @@
     &_white {
       background-image: url("../../assets/figures/Chess_tile_pl.svg");
     }
-    
+
     &_black {
       background-image: url("../../assets/figures/Chess_tile_pd.svg");
     }
@@ -43,7 +58,7 @@
     &_white {
       background-image: url("../../assets/figures/Chess_tile_ql-whitebg.svg");
     }
-    
+
     &_black {
       background-image: url("../../assets/figures/Chess_tile_qd.svg");
     }
@@ -52,7 +67,7 @@
     &_white {
       background-image: url("../../assets/figures/whitebg.svg");
     }
-    
+
     &_black {
       background-image: url("../../assets/figures/Chess_tile_rd.svg");
     }
@@ -61,7 +76,7 @@
     &_white {
       background-image: url("../../assets/figures/Chess_tile_kl-whitebg.svg");
     }
-    
+
     &_black {
       background-image: url("../../assets/figures/Chess_tile_kd.svg");
     }
@@ -82,7 +97,10 @@ $letter-col: (
 /* Positions */
 @for $i from 1 through 8 {
   @each $letter, $col in $letter-col {
-    .#{$letter}#{$i} { top: $cell-size * (8 - $i); left: $cell-size * $col; }
+    .#{$letter}#{$i} {
+      top: $cell-size * (8 - $i);
+      left: $cell-size * $col;
+    }
   }
 }
 

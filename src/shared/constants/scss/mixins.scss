@@ -1,0 +1,76 @@
+@import "./breakpoints";
+
+@mixin breakpoint($bp, $rule: min-width) {
+  @media screen and (#{$rule}: map-get($grid-breakpoints, $bp)) {
+    @content;
+  }
+}
+
+@mixin max-breakpoint($bp, $rule: max-width) {
+  @media screen and (#{$rule}: (map-get($grid-breakpoints, $bp) - 1)) {
+    @content;
+  }
+}
+
+@mixin min-max-breakpoint($min, $max) {
+  @media screen and (min-width: map-get($grid-breakpoints, $min)) and (max-width: (map-get($grid-breakpoints, $max) - 1)) {
+    @content;
+  }
+}
+
+@mixin hovering {
+  @media (hover), (min-width: 0\0), (min-device-pixel-ratio: 0) {
+    @content;
+  }
+}
+
+@mixin hideScrollbar() {
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+    display: none;
+  }
+}
+
+@mixin scrollContainer(
+  $xsSpaceFromRight,
+  $smSpaceFromRight,
+  $animationSpace: 0
+) {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: calc(100% + $xsSpaceFromRight);
+  padding-right: $xsSpaceFromRight;
+  @include hideScrollbar;
+
+  @include breakpoint(sm) {
+    width: calc(100% + $smSpaceFromRight);
+    padding-right: $smSpaceFromRight;
+  }
+
+  @include breakpoint(md) {
+    width: if(
+      $animationSpace==0,
+      calc(100% + $smSpaceFromRight),
+      calc(100% + $smSpaceFromRight + $animationSpace)
+    );
+    padding-right: if(
+      $animationSpace==0,
+      $smSpaceFromRight,
+      $smSpaceFromRight + $animationSpace
+    );
+  }
+  @include breakpoint(lg) {
+    overflow-x: unset;
+    overflow-y: unset;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    padding-right: 0;
+  }
+}

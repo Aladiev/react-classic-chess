@@ -1,115 +1,119 @@
-@import '../../../../entities/chess/config/cell-size';
+@import "../../../../entities/chess/config/cell-size";
 
 $letter-col: (
-  'A': 1,
-  'B': 2,
-  'C': 3,
-  'D': 4,
-  'E': 5,
-  'F': 6,
-  'G': 7,
-  'H': 8,
+  "A": 1,
+  "B": 2,
+  "C": 3,
+  "D": 4,
+  "E": 5,
+  "F": 6,
+  "G": 7,
+  "H": 8,
 );
 
 .board {
-    border: 1px solid black;
+  border: 1px solid black;
 
-    position: relative;
+  position: relative;
 
-    left: 50%;
-    top: $cell-size;
+  left: 50%;
+  top: $cell-size;
 
-    transform: translateX(-50%);
+  transform: translateX(-50%);
 
-    width: $cell-size * 8;
+  width: $cell-size * 8;
 }
 
 .row {
-    position: relative;
+  position: relative;
 
-    height: $cell-size;
+  height: $cell-size;
 
-    @for $i from 1 through 8 {
-        &:nth-child(#{$i})::after {content: '#{9 - $i}'}
+  @for $i from 1 through 8 {
+    &:nth-child(#{$i})::after {
+      content: "#{9 - $i}";
     }
+  }
 
-    @each $letter, $col in $letter-col {
-        &:nth-child(8) .cell:nth-child(#{$col}):before { content: $letter }
+  @each $letter, $col in $letter-col {
+    &:nth-child(8) .cell:nth-child(#{$col}):before {
+      content: $letter;
     }
+  }
 
-    &:nth-child(8) .cell::before {
-        display: block;
-    
-        position: absolute;
-    
-        left: 50%;
-        bottom: -40px;
-    
-        transform: translateX(-50%);
-    
-        font-weight: 700;
-    }
+  &:nth-child(8) .cell::before {
+    display: block;
 
-    &::after {
-        display: block;
-    
-        position: absolute;
-    
-        left: -40px;
-        top: 50%;
-    
-        transform: translateY(-50%);
-    
-        font-weight: 700;
-    }
+    position: absolute;
+
+    left: 50%;
+    bottom: -40px;
+
+    transform: translateX(-50%);
+
+    font-weight: 700;
+  }
+
+  &::after {
+    display: block;
+
+    position: absolute;
+
+    left: -40px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-weight: 700;
+  }
 }
 
 .cell {
-    position: relative;
+  position: relative;
 
-    display: inline-block;
+  display: inline-block;
 
-    width: $cell-size;
-    height: $cell-size;
+  width: $cell-size;
+  height: $cell-size;
 
-    margin: 0;
+  margin: 0;
 
-    &-black {
-        background-color: #bb7843;
-    }
+  &-black {
+    background-color: #bb7843;
+  }
 
-    &-white {
-        background-color: #e1c294;
-    }
+  &-white {
+    background-color: #e1c294;
+  }
 }
 
 .posible {
-    &::after {
-        content: '';
-    
-        display: block;
-    
-        position: absolute;
-    
-        top: 50%;
-        left: 50%;
-    
-        transform: translate(-50%, -50%);
-    }
+  &::after {
+    content: "";
 
-    &:not(.figure-inside)::after {
-        width: calc($cell-size / 6);
-        height: calc($cell-size / 6);
-    
-        background-color: green;
-    
-        border-radius: 50%;
-    }
+    display: block;
 
-    &.figure-inside::after {
-        width: $cell-size - 5px;
-        height: $cell-size - 5px;
-    
-        border: 3px solid green;
-    }
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+
+  &:not(.figure-inside)::after {
+    width: calc($cell-size / 6);
+    height: calc($cell-size / 6);
+
+    background-color: green;
+
+    border-radius: 50%;
+  }
+
+  &.figure-inside::after {
+    width: $cell-size - 5px;
+    height: $cell-size - 5px;
+
+    border: 3px solid green;
+  }
 }

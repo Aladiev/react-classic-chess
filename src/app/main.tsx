@@ -10,11 +10,9 @@ import { NavigationMenu } from "../pages/navigationMenu";
 import { ChessGame } from "../pages/chess";
 import { ProfilePage } from "../pages/profile";
 
-
 ReactDOM.createRoot(document.querySelector("#root")!).render(
   <Provider store={store}>
     <React.StrictMode>
-
       <BrowserRouter>
         <NavigationMenu />
         <Routes>
